@@ -39,7 +39,7 @@ export const initPagination = (
       limit,
       page,
     });
-  };
+  }
 
   const updatePagination = (total, { page, limit }) => {
     pageCount = Math.ceil(total / limit);  

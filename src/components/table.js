@@ -13,7 +13,7 @@ export function initTable(settings, onAction) {
 
   // @todo: #1.2 —  вывести дополнительные шаблоны до и после таблицы
 
-  [...before].reverse().forEach((subName) => {
+    before.reverse().forEach((subName) => {
     root[subName] = cloneTemplate(subName);
     root.container.prepend(root[subName].container);
   });
@@ -25,11 +25,11 @@ export function initTable(settings, onAction) {
 
   // @todo: #1.3 —  обработать события и вызвать onAction()
 
-  root.container.addEventListener('change', () => {
+  root.container.addEventListener('change', (e) => {
     onAction();
   });
 
-  root.container.addEventListener('reset', () => {
+  root.container.addEventListener('reset', (e) => {
     setTimeout(onAction);
   });
 

@@ -63,7 +63,7 @@ const sampleTable = initTable({
 
 // @todo: инициализация
 
-const applyPagination = initPagination(
+const {applyPagination, updatePagination} = initPagination(
   sampleTable.pagination.elements,
   (el, page, isCurrent) => {
     const input = el.querySelector('input');

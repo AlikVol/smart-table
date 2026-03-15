@@ -4,14 +4,14 @@ export function initFiltering(elements) {
         Object.keys(indexes).forEach((elementName) => {
           elements[elementName].append(
             ...Object.values(indexes[elementName]).map((name) => {
-              const option = document.createElement('option');
-              option.value = name;
-              option.textContent = name;
-              return option;
-            }),
-          );
-        });
+              const el = document.createElement('option');
+                el.textContent = name;
+                el.value = name;
+                return el;
+            }))
+        })
     }
+
 
     const applyFiltering = (query, state, action) => {
         // код с обработкой очистки поля
@@ -20,13 +20,15 @@ export function initFiltering(elements) {
         if (action && action.name === 'clear') {
           const field = action.dataset.field;
           const parent = action.parentElement;
-          const input = parent?.querySelector('input');
+          const input = parent.querySelector('input, select');
 
           if (input) {
             input.value = '';
           }
 
-          state[field] = '';
+          if (field && state[field] !== undefined) {
+                state[field] = '';
+            }
         } 
 
         // @todo: #4.5 — отфильтровать данные, используя компаратор
@@ -40,10 +42,10 @@ export function initFiltering(elements) {
         })
 
         return Object.keys(filter).length ? Object.assign({}, query, filter) : query; // если в фильтре что-то добавилось, применим к запросу
-    };
+    }
 
     return {
         updateIndexes,
         applyFiltering
-    };
+    }
 }
